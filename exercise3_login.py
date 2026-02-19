@@ -11,7 +11,7 @@ password = input("Enter password: ")
 
 
 if len(password) < 5:
-    print("your password is less very short")
+    print("your password is too short")
     exit()
 
 # Check credentials

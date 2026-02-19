@@ -23,7 +23,7 @@ if number % 3 == 0:
 else:
     print(f"{number} is NOT divisible by 3")
 
-# Check if divisible by 3
+# Check if divisible by 5
 if number % 5 == 0:
     print(f"{number} is divisible by 5")
 else:
