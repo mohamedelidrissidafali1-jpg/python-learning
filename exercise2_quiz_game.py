@@ -5,35 +5,43 @@ print("=== Quiz Game ===\n")
 questions = [
     {
         "question": "What is 5 + 3?",
-        "answer": "8"
+        "answer": "8",
+        "difficulty": "easy"
     },
     {
         "question": "What is the capital of France?",
-        "answer": "paris"
+        "answer": "paris",
+        "difficulty": "easy"
     },
     {
         "question": "How many days in a week?",
-        "answer": "7"
+        "answer": "7",
+        "difficulty": "easy"
     },
     {
         "question": "what is the name of the user?",
-        "answer": "Mr. Mohamed"
+        "answer": "Mr. Mohamed",
+        "difficulty": "medium"
     },
     {
         "question": "What is 10 * 2?",
-        "answer": "20"
+        "answer": "20",
+        "difficulty": "easy"
     },
     {
         "question": "What color is the sky on a clear day?",
-        "answer": "blue"
+        "answer": "blue",
+        "difficulty": "easy"
     },
     {
         "question": "What programming language are we learning?",
-        "answer": "python"
+        "answer": "python",
+        "difficulty": "medium"
     },
     {
         "question": "How many months are in a year?",
-        "answer": "12"
+        "answer": "12",
+        "difficulty": "medium"
     }
 ]
 
@@ -42,15 +50,24 @@ def run_quiz(quiz_questions):
     wrong_questions = []
     
     for i, q in enumerate(quiz_questions, 1):
-        print(f"\nQuestion {i}: {q['question']}")
-        user_answer = input("Your answer: ")
-        
-        if user_answer.lower() == q['answer'].lower():
-            print("✓ Correct!")
-            score += 1
-        else:
-            print(f"✗ Wrong! Answer was: {q['answer']}")
+        attempts = 0
+        correct = False
+        while attempts < 2:
+            print(f"\nQuestion {i}: {q['question']}")
+            user_answer = input("Your answer: ")
+            attempts += 1
+            
+            if user_answer.lower() == q['answer'].lower():
+                print("✓ Correct!")
+                score += 1
+                correct = True
+                break
+            else:
+                print(f"✗ Wrong! Answer was: {q['answer']}")
+           
+        if attempts == 2 and not correct:
             wrong_questions.append(q)
+
     if wrong_questions:
         print("\nQuestions you got wrong:")
         for q in wrong_questions:

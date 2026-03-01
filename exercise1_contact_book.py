@@ -4,11 +4,15 @@ print("=== Contact Book ===\n")
 contacts = {}
 
 def add_contact(name, phone, email):
-    contacts[name] = {
-        "phone": phone,
-        "email": email
+    if name in contacts:
+        print("Contact already exists")
+        return 
+    else:
+        contacts[name] = {
+            "phone": phone,
+            "email": email
     }
-    print(f"✓ Added contact: {name}")
+        print(f"✓ Added contact: {name}")
 
 def view_all_contacts():
     if len(contacts) == 0:
@@ -30,6 +34,20 @@ def search_contact(name):
     else:
         print(f"\n{name} not found!")
 
+
+def edit_contact(name):
+    if name in contacts:
+        new_phone = input("New phone :  ")
+        new_email = input("New email :  ")
+        contacts[name]["phone"] = new_phone
+        contacts[name]["email"] = new_email
+        print(f"✓ Updated contact: {name}")
+    else:
+        print(f"{name} not found!")
+
+def count_contacts():
+    return len(contacts)
+
 def delete_contact(name):
     if name in contacts:
         contacts.pop(name)
@@ -44,7 +62,9 @@ while True:
     print("2. View all")
     print("3. Search contact")
     print("4. Delete contact")
-    print("5. Exit")
+    print("5. Edit contact")
+    print("6. Count contacts")
+    print("7. Exit")
     
     choice = input("\nChoice: ")
     
@@ -64,7 +84,15 @@ while True:
     elif choice == "4":
         name = input("Delete name: ")
         delete_contact(name)
-    
+
     elif choice == "5":
+        name = input("Enter contact name to edit: ")
+        edit_contact(name)
+
+    elif choice == "6":
+        print(count_contacts())
+
+    
+    elif choice == "7":
         print("Goodbye!")
         break
