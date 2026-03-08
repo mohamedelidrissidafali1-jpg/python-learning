@@ -85,6 +85,36 @@ def view_today_logs():
     except Exception as e:
         print(f"Error reading logs: {e}")
 
+def count_logs():
+    counts = {
+        "INFO": 0,
+        "WARNING": 0,
+        "ERROR": 0
+    }
+
+    with open(LOG_FILE, "r") as file:
+        for line in file:
+            for level in counts:
+                if level in line: 
+                    counts[level] += 1
+
+    print(counts)
+
+def export_errors():
+
+    with open(LOG_FILE, "r") as file, open("errors.log", "w") as out:
+
+        for line in file: 
+            if "ERROR" in line: 
+                out.write(line)
+
+def log_debug(message):
+    log_message("DEBUG", message)
+
+def log_critical(message):
+    log_message("CRITICAL", message)
+
+
 # Test the logger
 print("=== Simple Logger ===\n")
 
@@ -103,5 +133,18 @@ view_errors_only()
 
 print("\nToday's logs:")
 view_today_logs()
+
+print("\nLog counts:")
+count_logs()
+
+print("\nExporting errors to errors.log...")
+export_errors()
+
+
+
+
+
+
+
 
 

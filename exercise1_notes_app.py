@@ -115,7 +115,24 @@ def count_notes():
 
     total = len(notes) 
 
-    print(f"Total notes: {total}")           
+    print(f"Total notes: {total}")   
+
+def show_today_notes():
+
+    if not os.path.exists(NOTES_FILE):
+        print("No notes found!")
+        return
+
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    with open(NOTES_FILE, "r") as file:
+        notes = file.readlines()
+
+    print("\n--- Notes from today ---")
+
+    for note in notes:
+        if today in note:
+            print(note.strip())        
 
 
 
@@ -130,7 +147,8 @@ while True:
     print("5. Delete a note")
     print("6. Backup notes")
     print("7. Count notes")
-    print("8. Exit")
+    print("8. Show today's notes")
+    print("9. Exit")
     
     choice = input("\nChoice: ")
     
@@ -167,6 +185,9 @@ while True:
         count_notes()
 
     elif choice == "8":
+        show_today_notes()
+
+    elif choice == "9":
         print("Goodbye!")
         break
     
